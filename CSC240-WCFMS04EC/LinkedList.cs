@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace CSC240_WCFMS04EC
 {
-    class LinkedList
+    class LinkedList<T>
     {
         private class ListNode
         {
-            public Element theData;
+            public T theData;
             public ListNode nextNode;
         }
 
@@ -45,41 +45,12 @@ namespace CSC240_WCFMS04EC
             listSize = 0;
         }
 
-        public LinkedList(LinkedList originalList)
-        {
-            ListNode originalNode;
-            ListNode copyNode;
-
-            if (originalList.listSize == 0)
-            {
-                headNode = null;
-                listSize = 0;
-                return;
-            }
-
-            originalNode = originalList.headNode;
-            headNode.theData = originalNode.theData.clone();
-
-            originalNode = originalNode.nextNode;
-            copyNode = headNode;
-            while (originalNode != null)
-            {
-                copyNode.nextNode = new CSC240_WCFMS04EC.LinkedList.ListNode();
-                copyNode = copyNode.nextNode;
-
-                copyNode.theData = originalNode.theData.clone();
-                originalNode = originalNode.nextNode;
-            }
-
-            listSize = originalList.listSize;
-        }
-
         public int size()
         {
             return listSize;
         }
 
-        public Element get(int pos)
+        public T get(int pos)
         {
             ListNode nodeWeWant;
 
@@ -87,15 +58,15 @@ namespace CSC240_WCFMS04EC
 
             if (nodeWeWant == null)
             {
-                return null;
+                return default(T);
             }
             else
             {
-                return nodeWeWant.theData.clone();
+                return nodeWeWant.theData;
             }
         }
 
-        public bool insert(Element anElement, int pos)
+        public bool insert(T aT, int pos)
         {
             ListNode prevNode;
             ListNode newNode;
@@ -106,7 +77,7 @@ namespace CSC240_WCFMS04EC
             }
 
             newNode = new ListNode();
-            newNode.theData = anElement.clone();
+            newNode.theData = aT;
 
             if (pos == 1)
             {
@@ -124,7 +95,7 @@ namespace CSC240_WCFMS04EC
             return true;
         }
 
-        public bool replace(Element anElement, int pos)
+        public bool replace(T aT, int pos)
         {
             ListNode nodeWeWant;
 
@@ -136,7 +107,7 @@ namespace CSC240_WCFMS04EC
             }
             else
             {
-                nodeWeWant.theData = anElement.clone();
+                nodeWeWant.theData = aT;
                 return true;
             }
         }
@@ -186,10 +157,25 @@ namespace CSC240_WCFMS04EC
                 currNode = headNode;
                 while (currNode != null)
                 {
-                    currNode.theData.display();
+                    currNode.theData.ToString();
                     currNode = currNode.nextNode;
                 }
             }
+        }
+
+        private bool isAlreadyInList(T aT)
+        {
+
+        }
+
+        public bool removeAnObject(T aT)
+        {
+
+        }
+
+        public bool editAnObject(T aT)
+        {
+
         }
     }
 }

@@ -6,7 +6,7 @@ namespace CSC240_WCFMS04EC
     {
         static void Main(string[] args)
         {
-            Set<Element> theSet = new Set<Element>();
+            LinkedList<Element> theList = new LinkedList<Element>();
             
             // present the menu for user to choose from
             // and process their choice
@@ -55,11 +55,11 @@ namespace CSC240_WCFMS04EC
 
                         if (choice[0] == 'M')
                         {
-                            addMovie(theSet);
+                            addMovie(theList);
                         }
                         else if (choice[0] == 'O')
                         {
-                            addOpera(theSet);
+                            addOpera(theList);
                         }
                         else
                         {
@@ -67,20 +67,20 @@ namespace CSC240_WCFMS04EC
                         }
                         break;
                     case '2':
-                        displayMovieTitles(theSet);
+                        displayMovieTitles(theList);
                         break;
                     case '3':
-                        displayOperaTitles(theSet);
+                        displayOperaTitles(theList);
                         break;
                     case '4':
                         Console.WriteLine("\nWhat Movie would you like to see information for?");
                         string title = Console.ReadLine().ToUpper();
-                        displayMovie(theSet, title);
+                        displayMovie(theList, title);
                         break;
                     case '5':
                         Console.WriteLine("\nWhat Opera would you like to see information for?");
                         title = Console.ReadLine().ToUpper();
-                        displayOpera(theSet, title);
+                        displayOpera(theList, title);
                         break;
                     case '6':
                         Console.WriteLine("\nWhich would you like to edit (Movie/Opera)?");
@@ -90,7 +90,7 @@ namespace CSC240_WCFMS04EC
                         {
                             Element movie = new Movie(); // create new Movie object
                             movie.readIn();              // get the new information
-                            bool result = theSet.editAnObject(movie); // the object and place store the result
+                            bool result = theList.editAnObject(movie); // the object and place store the result
 
                             if(!result)
                             {
@@ -105,7 +105,7 @@ namespace CSC240_WCFMS04EC
                         {
                             Element opera = new Opera(); // create new Opera object
                             opera.readIn();              // get the new information
-                            bool result = theSet.editAnObject(opera); // the object and place store the result
+                            bool result = theList.editAnObject(opera); // the object and place store the result
 
                             if (!result)
                             {
@@ -130,7 +130,7 @@ namespace CSC240_WCFMS04EC
                             Movie movie = new Movie();                        // create new Movie object
                             Console.WriteLine("\nWhat is the title of the Movie that you would like to remove?");
                             movie.Title = Console.ReadLine().ToUpper();               // get the new information
-                            bool result = theSet.removeAnObject(movie);    // the object and place store the result
+                            bool result = theList.removeAnObject(movie);    // the object and place store the result
 
                             if (!result)
                             {
@@ -146,7 +146,7 @@ namespace CSC240_WCFMS04EC
                             Opera opera = new Opera(); // create new Opera object
                             Console.WriteLine("\nWhat is the title of the Opera that you would like to remove?");
                             opera.Title = Console.ReadLine().ToUpper();               // get the new information
-                            bool result = theSet.removeAnObject(opera); // the object and place store the result
+                            bool result = theList.removeAnObject(opera); // the object and place store the result
 
                             if (!result)
                             {
@@ -178,15 +178,15 @@ namespace CSC240_WCFMS04EC
         }
         
         // Display's the title of all the movies
-        public static void displayMovieTitles(Set<Element> anElementSet)
+        public static void displayMovieTitles(LinkedList<Element> aList)
         {
             Element currObject;
             Movie movie;
 
             Console.WriteLine("\n");
-            for (int i = 0; i < anElementSet.size(); i++)
+            for (int i = 0; i < aList.size(); i++)
             {
-                currObject = anElementSet.getCurrent();
+                currObject = aList.get(i);
                 
                 if (currObject.getClassName().Equals("Movie"))
                 {
@@ -198,15 +198,15 @@ namespace CSC240_WCFMS04EC
         }
 
         // Display's the title of all the operas
-        public static void displayOperaTitles(Set<Element> anElementSet)
+        public static void displayOperaTitles(LinkedList<Element> aList)
         {
             Element currObject;
             Opera opera;
 
             Console.WriteLine("\n");
-            for (int i = 0; i < anElementSet.size(); i++)
+            for (int i = 0; i < aList.size(); i++)
             {
-                currObject = anElementSet.getCurrent();
+                currObject = aList.get(i);
                 if (currObject.getClassName().Equals("Opera"))
                 {
                     opera = (Opera)currObject; // casts the currentObject as Movie Object
@@ -217,7 +217,7 @@ namespace CSC240_WCFMS04EC
         }
 
         // Display's the information for a specified movie
-        public static void displayMovie(Set<Element> anElementSet, string title)
+        public static void displayMovie(LinkedList<Element> aList, string title)
         {
             bool found = false;
 
@@ -225,9 +225,9 @@ namespace CSC240_WCFMS04EC
             Movie movie;
 
             Console.WriteLine("\n");
-            for (int i = 0; i < anElementSet.size(); i++)
+            for (int i = 0; i < aList.size(); i++)
             {
-                currObject = anElementSet.getCurrent();
+                currObject = aList.get(i);
                 if (currObject.getClassName().Equals("Movie"))
                 {
                     movie = (Movie)currObject;
@@ -246,7 +246,7 @@ namespace CSC240_WCFMS04EC
         }
 
         // Display's the information for a specified opera
-        public static void displayOpera(Set<Element> anElementSet, string title)
+        public static void displayOpera(LinkedList<Element> aList, string title)
         {
             bool found = false;
 
@@ -254,9 +254,9 @@ namespace CSC240_WCFMS04EC
             Opera opera;
 
             Console.WriteLine("\n");
-            for (int i = 0; i < anElementSet.size(); i++)
+            for (int i = 0; i < aList.size(); i++)
             {
-                currObject = anElementSet.getCurrent();
+                currObject = aList.get(i);
                 if (currObject.getClassName().Equals("Opera"))
                 {
                     opera = (Opera)currObject;
@@ -275,11 +275,11 @@ namespace CSC240_WCFMS04EC
         }
 
         // adds a Movie to the set
-        public static void addMovie(Set<Element> anElementSet)
+        public static void addMovie(LinkedList<Element> aList)
         {
             Element movie = new Movie();
             movie.readIn();
-            bool result = anElementSet.add(movie);
+            bool result = aList.add(movie);
 
             // feedback on the result of the add
             if (!result)
@@ -293,11 +293,11 @@ namespace CSC240_WCFMS04EC
         }
 
         // adds an Opera to the set
-        public static void addOpera(Set<Element> anElementSet)
+        public static void addOpera(LinkedList<Element> aList)
         {
             Element opera = new Opera();
             opera.readIn();
-            bool result = anElementSet.add(opera);
+            bool result = aList.add(opera);
 
             // feedback on the result of the add
             if (!result)
