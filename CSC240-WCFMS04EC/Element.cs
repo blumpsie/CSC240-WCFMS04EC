@@ -1,5 +1,4 @@
-﻿using System;
-/*
+﻿/*
  * Exactly the same as Element.java, hopefully they work exaclty the same too.
  */
 namespace CSC240_WCFMS04EC

@@ -7,7 +7,7 @@ namespace CSC240_WCFMS04EC
         static void Main(string[] args)
         {
             LinkedList<Element> theList = new LinkedList<Element>();
-            
+         
             // present the menu for user to choose from
             // and process their choice
             bool terminate = false;
@@ -184,7 +184,7 @@ namespace CSC240_WCFMS04EC
             Movie movie;
 
             Console.WriteLine("\n");
-            for (int i = 0; i < aList.size(); i++)
+            for (int i = 1; i <= aList.size(); i++)
             {
                 currObject = aList.get(i);
                 
@@ -204,7 +204,7 @@ namespace CSC240_WCFMS04EC
             Opera opera;
 
             Console.WriteLine("\n");
-            for (int i = 0; i < aList.size(); i++)
+            for (int i = 1; i <= aList.size(); i++)
             {
                 currObject = aList.get(i);
                 if (currObject.getClassName().Equals("Opera"))
@@ -225,7 +225,7 @@ namespace CSC240_WCFMS04EC
             Movie movie;
 
             Console.WriteLine("\n");
-            for (int i = 0; i < aList.size(); i++)
+            for (int i = 1; i <= aList.size(); i++)
             {
                 currObject = aList.get(i);
                 if (currObject.getClassName().Equals("Movie"))
@@ -254,7 +254,7 @@ namespace CSC240_WCFMS04EC
             Opera opera;
 
             Console.WriteLine("\n");
-            for (int i = 0; i < aList.size(); i++)
+            for (int i = 1; i <= aList.size(); i++)
             {
                 currObject = aList.get(i);
                 if (currObject.getClassName().Equals("Opera"))
@@ -279,16 +279,20 @@ namespace CSC240_WCFMS04EC
         {
             Element movie = new Movie();
             movie.readIn();
-            bool result = aList.add(movie);
+            int result = aList.insert(movie, 1);
 
             // feedback on the result of the add
-            if (!result)
+            if (result == -2)
             {
                 Console.WriteLine("\nThat Movie is already in the set.");
             }
-            else
+            else if (result == 0)
             {
                 Console.WriteLine("\nSuccessful add.");
+            }
+            else
+            {
+                Console.WriteLine("\nOut of Range");
             }
         }
 
@@ -297,16 +301,20 @@ namespace CSC240_WCFMS04EC
         {
             Element opera = new Opera();
             opera.readIn();
-            bool result = aList.add(opera);
+            int result = aList.insert(opera, 1);
 
             // feedback on the result of the add
-            if (!result)
+            if (result == -2)
             {
                 Console.WriteLine("\nThat Opera is already in the set.");
             }
-            else
+            else if (result == 0)
             {
                 Console.WriteLine("\nSuccessful add.");
+            }
+            else
+            {
+                Console.WriteLine("\nOut of Range");
             }
         }
     }

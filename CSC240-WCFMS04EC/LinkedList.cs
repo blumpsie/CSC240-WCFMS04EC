@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CSC240_WCFMS04EC
 {
@@ -66,18 +62,23 @@ namespace CSC240_WCFMS04EC
             }
         }
 
-        public bool insert(T aT, int pos)
+        public int insert(T aT, int pos)
         {
             ListNode prevNode;
             ListNode newNode;
 
             if((pos < 1) || (pos > listSize + 1))
             {
-                return false;
+                return -1;
             }
 
             newNode = new ListNode();
             newNode.theData = aT;
+
+            if(isAlreadyInList(aT))
+            {
+                return -2;
+            }
 
             if (pos == 1)
             {
@@ -92,7 +93,7 @@ namespace CSC240_WCFMS04EC
             }
 
             listSize++;
-            return true;
+            return 0;
         }
 
         public bool replace(T aT, int pos)
@@ -162,20 +163,79 @@ namespace CSC240_WCFMS04EC
                 }
             }
         }
-
+        
         private bool isAlreadyInList(T aT)
         {
+            T currT;
+            string paramClass = aT.GetType().Name;
+            string currClass;
 
+            for (int i = 1; i <= listSize; i++)
+            {
+                currT = get(i);
+                currClass = currT.GetType().Name;
+
+                if (paramClass.Equals(currClass))
+                {
+                    if (currT.Equals(aT))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
 
         public bool removeAnObject(T aT)
         {
+            bool removed = false;
 
-        }
+                T currT;
+                string paramClass = aT.GetType().Name;
+                string currClass;
+
+                for (int i = 1; i <= listSize; i++)
+                {
+                    currT = get(i);
+                    currClass = currT.GetType().Name;
+
+                    if (paramClass.Equals(currClass))
+                    {
+                        if (currT.Equals(aT))
+                        {
+                            remove(i);
+                            removed = true;
+                        }
+                    }
+                }
+                return removed;
+    }
 
         public bool editAnObject(T aT)
         {
+            bool edited = false;
 
+                T currT;
+                string paramClass = aT.GetType().Name;
+                string currClass;
+
+                for (int i = 1; i <= listSize; i++)
+                {
+                    currT = get(i);
+                    currClass = currT.GetType().Name;
+
+                    if (paramClass.Equals(currClass))
+                    {
+                        if (currT.Equals(aT))
+                        {
+                        Console.WriteLine("FUCK!!!!!!!!!!!!!!!");
+                        replace(aT, i);
+                            edited = true;
+                        }
+                    }
+                }
+                return edited;
         }
     }
 }

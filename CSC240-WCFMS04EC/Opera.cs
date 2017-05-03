@@ -57,7 +57,7 @@ namespace CSC240_WCFMS04EC
             Console.WriteLine(this.ToString());
         }
 
-        public bool equals(Object obj)
+        public override bool Equals(Object obj)
         {
             return this.title.Equals(((Opera)obj).Title);
         }
